@@ -154,13 +154,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .image-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
         .image-placeholder {
@@ -173,53 +166,100 @@
             color: var(--very-light-royal-blue);
             text-align: center;
             padding: 20px;
-            background: linear-gradient(45deg, var(--dark-royal-blue), var(--royal-blue));
         }
 
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
-        }
-
-        /* File Upload Styling */
-        .image-upload {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .image-upload input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
             cursor: pointer;
-            z-index: 2;
+            transition: transform 0.3s ease;
         }
 
-        .upload-preview {
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            display: none;
+            background: rgba(30, 58, 138, 0.95);
+            backdrop-filter: blur(10px);
         }
 
-        .upload-text {
+        .modal.show {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            color: var(--very-light-royal-blue);
-            text-align: center;
-            padding: 20px;
+            animation: modalFadeIn 0.3s ease-out;
         }
 
-        .upload-text::before {
-            content: "📷";
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            background: transparent;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: var(--royal-blue);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .modal-close:hover {
+            background: var(--dark-royal-blue);
+            transform: scale(1.1);
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(65, 105, 225, 0.9);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .image-container:hover .click-hint {
+            opacity: 1;
         }
 
         /* Special Messages */
@@ -296,6 +336,11 @@
         @keyframes slideUp {
             0% { opacity: 0; transform: translateY(50px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes modalFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         /* Mobile Responsiveness */
@@ -401,15 +446,12 @@
 
         <section class="content-section">
             <h2>Our Beautiful Memories 📸</h2>
-            <div class="image-container">
-                <div class="image-upload">
-                    <input type="file" accept="image/*" id="photo1" onchange="loadImage(this, 'preview1')">
-                    <img id="preview1" class="upload-preview" alt="Our Photo 1">
-                    <div class="upload-text">
-                        <div>Click to upload your first photo! 💙</div>
-                        <small>PNG, JPG, or any image format</small>
-                    </div>
+            <div class="image-container" onclick="openModal('modal1')">
+                <div class="image-placeholder">
+                    Your first photo will go here! 💙<br>
+                    (Replace this with your PNG image)
                 </div>
+                <div class="click-hint">Click to view full size</div>
             </div>
             <p>Every picture we take together becomes a treasured memory. Looking at our photos always makes me smile and reminds me of all our wonderful moments together.</p>
         </section>
@@ -427,15 +469,12 @@
 
         <section class="content-section">
             <h2>More Precious Moments 💫</h2>
-            <div class="image-container">
-                <div class="image-upload">
-                    <input type="file" accept="image/*" id="photo2" onchange="loadImage(this, 'preview2')">
-                    <img id="preview2" class="upload-preview" alt="Our Photo 2">
-                    <div class="upload-text">
-                        <div>Click to upload your second photo! 💙</div>
-                        <small>PNG, JPG, or any image format</small>
-                    </div>
+            <div class="image-container" onclick="openModal('modal2')">
+                <div class="image-placeholder">
+                    Your second photo will go here! 💙<br>
+                    (Replace this with your PNG image)
                 </div>
+                <div class="click-hint">Click to view full size</div>
             </div>
             <p>Each moment we spend together becomes a part of our love story. I can't wait to create many more beautiful memories with you in the year ahead.</p>
         </section>
@@ -470,39 +509,55 @@
         </p>
     </footer>
 
+    <!-- Image Modals -->
+    <div id="modal1" class="modal" onclick="closeModal('modal1')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal1')">&times;</span>
+            <img id="modalImg1" class="modal-image" src="" alt="Photo 1">
+        </div>
+    </div>
+
+    <div id="modal2" class="modal" onclick="closeModal('modal2')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
+            <img id="modalImg2" class="modal-image" src="" alt="Photo 2">
+        </div>
+    </div>
+
     <script>
-        function loadImage(input, previewId) {
-            const file = input.files[0];
-            const preview = document.getElementById(previewId);
-            const uploadText = input.parentElement.querySelector('.upload-text');
+        // Modal functionality
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalImg = document.getElementById('modalImg' + modalId.slice(-1));
+            const imgContainer = event.currentTarget;
+            const img = imgContainer.querySelector('img');
             
-            if (file) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    uploadText.style.display = 'none';
-                    
-                    // Add a nice fade-in effect
-                    preview.style.opacity = '0';
-                    setTimeout(() => {
-                        preview.style.transition = 'opacity 0.5s ease-in-out';
-                        preview.style.opacity = '1';
-                    }, 100);
-                };
-                
-                reader.readAsDataURL(file);
+            if (img && img.src) {
+                modalImg.src = img.src;
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
             }
         }
 
-        // Add click-to-change functionality for uploaded images
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('upload-preview') && e.target.style.display !== 'none') {
-                const container = e.target.closest('.image-upload');
-                const input = container.querySelector('input[type="file"]');
-                input.click();
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal('modal1');
+                closeModal('modal2');
             }
+        });
+
+        // Prevent modal from closing when clicking on the image
+        document.querySelectorAll('.modal-content').forEach(content => {
+            content.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
         });
     </script>
 </body>
