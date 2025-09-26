@@ -154,6 +154,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
         .image-placeholder {
@@ -166,12 +173,53 @@
             color: var(--very-light-royal-blue);
             text-align: center;
             padding: 20px;
+            background: linear-gradient(45deg, var(--dark-royal-blue), var(--royal-blue));
         }
 
         .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* File Upload Styling */
+        .image-upload {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .upload-preview {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .upload-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--very-light-royal-blue);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .upload-text::before {
+            content: "📷";
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
 
         /* Special Messages */
@@ -354,9 +402,13 @@
         <section class="content-section">
             <h2>Our Beautiful Memories 📸</h2>
             <div class="image-container">
-                <div class="image-placeholder">
-                    Your first photo will go here! 💙<br>
-                    (Replace this with your PNG image)
+                <div class="image-upload">
+                    <input type="file" accept="image/*" id="photo1" onchange="loadImage(this, 'preview1')">
+                    <img id="preview1" class="upload-preview" alt="Our Photo 1">
+                    <div class="upload-text">
+                        <div>Click to upload your first photo! 💙</div>
+                        <small>PNG, JPG, or any image format</small>
+                    </div>
                 </div>
             </div>
             <p>Every picture we take together becomes a treasured memory. Looking at our photos always makes me smile and reminds me of all our wonderful moments together.</p>
@@ -376,9 +428,13 @@
         <section class="content-section">
             <h2>More Precious Moments 💫</h2>
             <div class="image-container">
-                <div class="image-placeholder">
-                    Your second photo will go here! 💙<br>
-                    (Replace this with your PNG image)
+                <div class="image-upload">
+                    <input type="file" accept="image/*" id="photo2" onchange="loadImage(this, 'preview2')">
+                    <img id="preview2" class="upload-preview" alt="Our Photo 2">
+                    <div class="upload-text">
+                        <div>Click to upload your second photo! 💙</div>
+                        <small>PNG, JPG, or any image format</small>
+                    </div>
                 </div>
             </div>
             <p>Each moment we spend together becomes a part of our love story. I can't wait to create many more beautiful memories with you in the year ahead.</p>
@@ -413,5 +469,41 @@
             Made with 💙 for the most amazing girlfriend
         </p>
     </footer>
+
+    <script>
+        function loadImage(input, previewId) {
+            const file = input.files[0];
+            const preview = document.getElementById(previewId);
+            const uploadText = input.parentElement.querySelector('.upload-text');
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                    
+                    // Add a nice fade-in effect
+                    preview.style.opacity = '0';
+                    setTimeout(() => {
+                        preview.style.transition = 'opacity 0.5s ease-in-out';
+                        preview.style.opacity = '1';
+                    }, 100);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add click-to-change functionality for uploaded images
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('upload-preview') && e.target.style.display !== 'none') {
+                const container = e.target.closest('.image-upload');
+                const input = container.querySelector('input[type="file"]');
+                input.click();
+            }
+        });
+    </script>
 </body>
 </html>
