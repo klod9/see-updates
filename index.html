@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Erich! 💙</title>
+    <title>Happy Birthday, My Love ✨</title>
     <style>
         * {
             margin: 0;
@@ -11,19 +11,10 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --royal-blue: #4169E1;
-            --dark-royal-blue: #1E3A8A;
-            --light-royal-blue: #6495ED;
-            --very-light-royal-blue: #B0C4DE;
-            --royal-blue-transparent: rgba(65, 105, 225, 0.1);
-        }
-
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, var(--dark-royal-blue) 0%, var(--royal-blue) 50%, var(--light-royal-blue) 100%);
-            min-height: 100vh;
-            color: white;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
             overflow-x: hidden;
         }
 
@@ -32,533 +23,452 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
-            background: linear-gradient(45deg, var(--dark-royal-blue), var(--royal-blue));
+            background: linear-gradient(45deg, #1e3c72, #2a5298, #3d6bb3);
+            background-size: 600% 600%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            animation: fadeOut 4s ease-in-out 3s forwards;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .loading-screen.fade-out {
+            animation: fadeOut 1s ease-out forwards;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .loading-heart {
+            font-size: 4rem;
+            color: #87ceeb;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         .loading-text {
+            font-size: 2rem;
+            font-weight: bold;
             text-align: center;
-            padding: 20px;
-            animation: pulse 2s infinite;
+            animation: slideUp 2s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .loading-text h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .loading-text p {
+        .loading-subtext {
             font-size: 1.2rem;
-            color: var(--very-light-royal-blue);
+            margin-top: 1rem;
+            opacity: 0.8;
+            animation: slideUp 2s ease-out 0.5s both;
         }
 
-        .loading-flower {
-            width: 100px;
-            height: 100px;
-            margin: 30px 0;
-            animation: rotate 3s linear infinite;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Animated Flower SVG */
-        .flower-svg {
-            width: 100%;
-            height: 100%;
-            fill: var(--light-royal-blue);
-        }
-
-        /* Background Decorations */
-        .bg-decoration {
-            position: fixed;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .flower-1 { top: 10%; left: 10%; width: 80px; height: 80px; animation: float 6s ease-in-out infinite; }
-        .flower-2 { top: 60%; right: 15%; width: 100px; height: 100px; animation: float 8s ease-in-out infinite 2s; }
-        .flower-3 { bottom: 20%; left: 20%; width: 60px; height: 60px; animation: float 7s ease-in-out infinite 1s; }
 
         /* Main Content */
         .main-content {
             opacity: 0;
-            animation: fadeIn 2s ease-in-out 5s forwards;
-            padding: 20px;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-content.show {
+            opacity: 1;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 20px;
         }
 
         .header {
             text-align: center;
-            padding: 40px 20px;
-            margin-bottom: 30px;
+            padding: 3rem 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .header h1 {
             font-size: 3rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: glow 3s ease-in-out infinite alternate;
+            margin-bottom: 1rem;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 10px rgba(255,255,255,0.3);
         }
 
-        .header p {
-            font-size: 1.3rem;
-            color: var(--very-light-royal-blue);
-            font-style: italic;
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 10px rgba(255,255,255,0.3); }
+            to { text-shadow: 2px 2px 20px rgba(255,255,255,0.6); }
         }
 
-        /* Content Sections */
-        .content-section {
-            background: var(--royal-blue-transparent);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--royal-blue);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            animation: slideUp 0.8s ease-out;
-        }
-
-        .content-section h2 {
-            color: var(--very-light-royal-blue);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .content-section p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        /* Image Containers */
-        .image-container {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            margin: 20px auto;
-            border: 3px solid var(--royal-blue);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            position: relative;
-            background: var(--dark-royal-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            color: var(--very-light-royal-blue);
-            text-align: center;
-            padding: 20px;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .image-container:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 58, 138, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-            background: transparent;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 15px;
-        }
-
-        .modal-close {
+        .floating-icons {
             position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 40px;
-            height: 40px;
-            background: var(--royal-blue);
-            border: 2px solid white;
-            border-radius: 50%;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 2001;
-        }
-
-        .modal-close:hover {
-            background: var(--dark-royal-blue);
-            transform: scale(1.1);
-        }
-
-        .click-hint {
-            position: absolute;
-            bottom: 10px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(65, 105, 225, 0.9);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
             pointer-events: none;
         }
 
-        .image-container:hover .click-hint {
-            opacity: 1;
+        .floating-icons span {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.7;
         }
 
-        /* Special Messages */
-        .love-message {
-            background: linear-gradient(45deg, var(--royal-blue), var(--dark-royal-blue));
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-            padding: 40px;
-            border-radius: 25px;
-            margin: 40px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-royal-blue);
-            padding: 30px;
-            text-align: center;
-            margin-top: 50px;
-            border-top: 3px solid var(--royal-blue);
-        }
-
-        .footer a {
-            color: var(--light-royal-blue);
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            border: 2px solid var(--royal-blue);
-            border-radius: 25px;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            background: var(--royal-blue);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* Animations */
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .floating-icons span:nth-child(1) { left: -100px; top: -50px; animation-delay: 0s; }
+        .floating-icons span:nth-child(2) { right: -100px; top: -30px; animation-delay: 1s; }
+        .floating-icons span:nth-child(3) { left: -80px; bottom: -40px; animation-delay: 2s; }
+        .floating-icons span:nth-child(4) { right: -90px; bottom: -20px; animation-delay: 1.5s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
 
-        @keyframes glow {
-            0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-            100% { text-shadow: 0 0 20px var(--light-royal-blue), 2px 2px 4px rgba(0,0,0,0.3); }
+        .section {
+            background: linear-gradient(45deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease-out forwards;
         }
 
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(50px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes modalFadeIn {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+        .section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            color: #ffd700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b9d, #ffd700, #ff6b9d);
+            border-radius: 2px;
+        }
+
+        .photo-container {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: linear-gradient(45deg, #5dade2, #85c1e9);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .photo-placeholder:hover::before {
+            left: 100%;
+        }
+
+        .photo-text {
+            font-size: 1.1rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            animation: textGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+            to { text-shadow: 1px 1px 10px rgba(255,255,255,0.4); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(45deg, rgba(135,206,235,0.2), rgba(173,216,230,0.2));
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #5dade2, #3498db);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(93,173,226,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(93,173,226,0.6);
+            background: linear-gradient(45deg, #3498db, #5dade2);
+        }
+
+        .sparkles {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1rem;
+            animation: sparkle 3s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translateY(0px) rotate(0deg); }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px) rotate(180deg); }
         }
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .header h1 { font-size: 2.2rem; }
-            .loading-text h1 { font-size: 2rem; }
-            .content-section { padding: 20px; margin: 20px 10px; }
-            .image-container { max-width: 250px; height: 250px; }
-            .main-content { padding: 10px; }
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .loading-text {
+                font-size: 1.5rem;
+            }
+
+            .floating-icons span:nth-child(1) { left: -60px; }
+            .floating-icons span:nth-child(2) { right: -60px; }
+            .floating-icons span:nth-child(3) { left: -50px; }
+            .floating-icons span:nth-child(4) { right: -50px; }
         }
 
         @media (max-width: 480px) {
-            .header h1 { font-size: 1.8rem; }
-            .loading-text h1 { font-size: 1.6rem; }
-            .loading-text p { font-size: 1rem; }
-            .content-section p { font-size: 1rem; }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .photo-placeholder {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-flower">
-            <svg class="flower-svg" viewBox="0 0 100 100">
-                <g transform="translate(50,50)">
-                    <circle cx="0" cy="0" r="8" fill="white"/>
-                    <ellipse cx="0" cy="-20" rx="8" ry="15" fill="currentColor" opacity="0.9"/>
-                    <ellipse cx="14" cy="-14" rx="8" ry="15" fill="currentColor" opacity="0.8" transform="rotate(45)"/>
-                    <ellipse cx="20" cy="0" rx="8" ry="15" fill="currentColor" opacity="0.9" transform="rotate(90)"/>
-                    <ellipse cx="14" cy="14" rx="8" ry="15" fill="currentColor" opacity="0.8" transform="rotate(135)"/>
-                    <ellipse cx="0" cy="20" rx="8" ry="15" fill="currentColor" opacity="0.9" transform="rotate(180)"/>
-                    <ellipse cx="-14" cy="14" rx="8" ry="15" fill="currentColor" opacity="0.8" transform="rotate(225)"/>
-                    <ellipse cx="-20" cy="0" rx="8" ry="15" fill="currentColor" opacity="0.9" transform="rotate(270)"/>
-                    <ellipse cx="-14" cy="-14" rx="8" ry="15" fill="currentColor" opacity="0.8" transform="rotate(315)"/>
-                </g>
-            </svg>
-        </div>
-        <div class="loading-text">
-            <h1>Happy Birthday, Erich! 🎉</h1>
-            <p>Love, your baby 💙</p>
-        </div>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-heart">💙</div>
+        <div class="loading-text">Welcome, Honey ✨</div>
+        <div class="loading-subtext">Something special awaits you, Baby 💕</div>
     </div>
 
-    <!-- Background Decorations -->
-    <div class="bg-decoration flower-1">
-        <svg class="flower-svg" viewBox="0 0 100 100">
-            <g transform="translate(50,50)">
-                <circle cx="0" cy="0" r="6" fill="white"/>
-                <ellipse cx="0" cy="-15" rx="6" ry="12" fill="currentColor"/>
-                <ellipse cx="10" cy="-10" rx="6" ry="12" fill="currentColor" transform="rotate(45)"/>
-                <ellipse cx="15" cy="0" rx="6" ry="12" fill="currentColor" transform="rotate(90)"/>
-                <ellipse cx="10" cy="10" rx="6" ry="12" fill="currentColor" transform="rotate(135)"/>
-                <ellipse cx="0" cy="15" rx="6" ry="12" fill="currentColor" transform="rotate(180)"/>
-                <ellipse cx="-10" cy="10" rx="6" ry="12" fill="currentColor" transform="rotate(225)"/>
-                <ellipse cx="-15" cy="0" rx="6" ry="12" fill="currentColor" transform="rotate(270)"/>
-                <ellipse cx="-10" cy="-10" rx="6" ry="12" fill="currentColor" transform="rotate(315)"/>
-            </g>
-        </svg>
-    </div>
-    <div class="bg-decoration flower-2">
-        <svg class="flower-svg" viewBox="0 0 100 100">
-            <g transform="translate(50,50)">
-                <circle cx="0" cy="0" r="8" fill="white"/>
-                <ellipse cx="0" cy="-18" rx="7" ry="14" fill="currentColor"/>
-                <ellipse cx="12" cy="-12" rx="7" ry="14" fill="currentColor" transform="rotate(45)"/>
-                <ellipse cx="18" cy="0" rx="7" ry="14" fill="currentColor" transform="rotate(90)"/>
-                <ellipse cx="12" cy="12" rx="7" ry="14" fill="currentColor" transform="rotate(135)"/>
-                <ellipse cx="0" cy="18" rx="7" ry="14" fill="currentColor" transform="rotate(180)"/>
-                <ellipse cx="-12" cy="12" rx="7" ry="14" fill="currentColor" transform="rotate(225)"/>
-                <ellipse cx="-18" cy="0" rx="7" ry="14" fill="currentColor" transform="rotate(270)"/>
-                <ellipse cx="-12" cy="-12" rx="7" ry="14" fill="currentColor" transform="rotate(315)"/>
-            </g>
-        </svg>
-    </div>
-    <div class="bg-decoration flower-3">
-        <svg class="flower-svg" viewBox="0 0 100 100">
-            <g transform="translate(50,50)">
-                <circle cx="0" cy="0" r="5" fill="white"/>
-                <ellipse cx="0" cy="-12" rx="5" ry="10" fill="currentColor"/>
-                <ellipse cx="8" cy="-8" rx="5" ry="10" fill="currentColor" transform="rotate(45)"/>
-                <ellipse cx="12" cy="0" rx="5" ry="10" fill="currentColor" transform="rotate(90)"/>
-                <ellipse cx="8" cy="8" rx="5" ry="10" fill="currentColor" transform="rotate(135)"/>
-                <ellipse cx="0" cy="12" rx="5" ry="10" fill="currentColor" transform="rotate(180)"/>
-                <ellipse cx="-8" cy="8" rx="5" ry="10" fill="currentColor" transform="rotate(225)"/>
-                <ellipse cx="-12" cy="0" rx="5" ry="10" fill="currentColor" transform="rotate(270)"/>
-                <ellipse cx="-8" cy="-8" rx="5" ry="10" fill="currentColor" transform="rotate(315)"/>
-            </g>
-        </svg>
-    </div>
+    <!-- Sparkles Background -->
+    <div class="sparkles" id="sparkles"></div>
 
     <!-- Main Content -->
-    <div class="main-content">
-        <header class="header">
-            <h1>Happy Birthday, Beautiful! 🎂</h1>
-            <p>To my amazing girlfriend, Erich ✨</p>
-        </header>
-
-        <section class="content-section">
-            <h2>A Special Day for a Special Person 💙</h2>
-            <p>Today is all about celebrating you, honey! Another year of your beautiful smile, your incredible heart, and all the joy you bring into my life.</p>
-            <p>You make every day brighter just by being you. I'm so grateful to have you by my side on this amazing journey we're sharing together.</p>
-        </section>
-
-        <section class="content-section">
-            <h2>Our Beautiful Memories 📸</h2>
-            <div class="image-container" onclick="openModal('modal1')">
-                <div class="image-placeholder">
-                    Your first photo will go here! 💙<br>
-                    (Replace this with your PNG image)
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <h1>🎉 Happy Birthday, My Beautiful Love! 🎉</h1>
+                <div class="floating-icons">
+                    <span>💕</span>
+                    <span>✨</span>
+                    <span>🌟</span>
+                    <span>💝</span>
                 </div>
-                <div class="click-hint">Click to view full size</div>
             </div>
-            <p>Every picture we take together becomes a treasured memory. Looking at our photos always makes me smile and reminds me of all our wonderful moments together.</p>
-        </section>
 
-        <div class="love-message">
-            "Baby, you're not just my girlfriend - you're my best friend, my partner in crime, and the love of my life. Happy Birthday!" 💕
-        </div>
-
-        <section class="content-section">
-            <h2>What Makes You Special ✨</h2>
-            <p>Your laugh that lights up any room you enter. Your kindness that touches everyone you meet. Your strength that inspires me every single day.</p>
-            <p>The way you see the world with such beauty and optimism. How you make even the simplest moments feel magical just by being there.</p>
-            <p>You have this incredible ability to make me feel loved and appreciated, and I want you to feel that same love multiplied by a thousand today!</p>
-        </section>
-
-        <section class="content-section">
-            <h2>More Precious Moments 💫</h2>
-            <div class="image-container" onclick="openModal('modal2')">
-                <div class="image-placeholder">
-                    Your second photo will go here! 💙<br>
-                    (Replace this with your PNG image)
+            <!-- First Section: Birthday Greeting -->
+            <div class="section">
+                <h2>💙 You Are Simply Incredible 💙</h2>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div class="photo-text">📷 photo1.jpg<br>Our Beautiful Beginning</div>
+                    </div>
                 </div>
-                <div class="click-hint">Click to view full size</div>
+                <div class="message">
+                    From that magical first conversation on May 17, 2025, to this very moment, you have continuously amazed me with your incredible personality and radiant well-being. Every day with you feels like discovering a new treasure, and I find myself falling deeper in love with who you are. Your laugh, your kindness, your brilliant mind - everything about you is absolutely incomparable. No one else could ever hold a candle to the light you bring into this world. You're not just my girlfriend; you're my inspiration, my joy, and the most extraordinary person I've ever had the privilege to know. Happy birthday to the most amazing soul! 🌟💕
+                </div>
             </div>
-            <p>Each moment we spend together becomes a part of our love story. I can't wait to create many more beautiful memories with you in the year ahead.</p>
-        </section>
 
-        <section class="content-section">
-            <h2>Birthday Wishes for My Love 🌟</h2>
-            <p>I wish for you all the happiness your heart can hold. May this new year of life bring you endless adventures, beautiful surprises, and dreams coming true.</p>
-            <p>May you always know how deeply you are loved, not just by me, but by everyone whose life you've touched with your warmth and kindness.</p>
-            <p>And may we continue to grow together, laugh together, and build the most beautiful life side by side.</p>
-        </section>
+            <!-- Second Section: Shared Moments -->
+            <div class="section">
+                <h2>🤝 Our Soulmate Connection 🤝</h2>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div class="photo-text">📷 photo2.jpg<br>Our Precious Moments</div>
+                    </div>
+                </div>
+                <div class="message">
+                    The way we understand each other goes beyond words - it's like we share the same heart and soul. Your patience with me, your genuine nature, and the purity of your love have created something so beautiful between us. We're like two puzzle pieces that fit perfectly together, bound by countless pinky promises and sealed with endless love. Every shared glance, every quiet moment, every laugh we've shared has woven us together in ways that feel destined. You truly are my soulmate, and I cherish every second of this incredible journey we're on together. 💫👫
+                </div>
+            </div>
 
-        <div class="love-message">
-            "Thank you for being the most amazing girlfriend a person could ask for. Here's to celebrating you today and always, honey!" 🥂💙
-        </div>
+            <!-- Third Section: Gratitude -->
+            <div class="section">
+                <h2>🙏 My Guiding Light 🙏</h2>
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div class="photo-text">📷 photo3.jpg<br>You Are My Everything</div>
+                    </div>
+                </div>
+                <div class="message">
+                    I cannot express how deeply grateful I am to have you as the brilliant light in my life. Before you, my world felt incomplete, like I was wandering in darkness without knowing what I was searching for. But you... you illuminated everything. You gave my life meaning, purpose, and a joy I never knew was possible. Without you, my days would be empty, my heart would be hollow, and my life would feel utterly worthless. You are my sun, my moon, my stars - you are everything that makes life worth living. Thank you for choosing to share your beautiful heart with me. I love you beyond words, beyond time, beyond everything. 💖🌅
+                </div>
+            </div>
 
-        <section class="content-section">
-            <h2>Looking Forward Together 🌈</h2>
-            <p>As you blow out your candles today, know that I'm making a wish too - for many more birthdays to celebrate together, for countless more reasons to smile, and for our love to keep growing stronger every day.</p>
-            <p>You deserve all the love, joy, and happiness in the world, baby. And I promise to do everything I can to make sure you feel that love every single day.</p>
-            <p>Happy Birthday, my beautiful Erich. I love you more than words could ever express! 💙🎉</p>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p style="margin-bottom: 15px; color: var(--very-light-royal-blue);">Connect with me:</p>
-        <a href="https://www.facebook.com/k1odyy/" target="_blank" rel="noopener noreferrer">
-            Visit my Facebook Profile 📱
-        </a>
-        <p style="margin-top: 20px; font-size: 0.9rem; color: var(--very-light-royal-blue);">
-            Made with 💙 for the most amazing girlfriend
-        </p>
-    </footer>
-
-    <!-- Image Modals -->
-    <div id="modal1" class="modal" onclick="closeModal('modal1')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="modal-close" onclick="closeModal('modal1')">&times;</span>
-            <img id="modalImg1" class="modal-image" src="" alt="Photo 1">
-        </div>
-    </div>
-
-    <div id="modal2" class="modal" onclick="closeModal('modal2')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="modal-close" onclick="closeModal('modal2')">&times;</span>
-            <img id="modalImg2" class="modal-image" src="" alt="Photo 2">
+            <!-- Footer -->
+            <div class="footer">
+                <h3>💌 Ready to Make Your Handsome Boyfriend's Day? 💌</h3>
+                <p>Your incredibly charming and devastatingly handsome boyfriend is waiting for your message! Click below to make him smile from ear to ear! 😏💕</p>
+                <a href="#" class="cta-button" onclick="showFacebookPrompt()">💬 Message Your Handsome Man 💬</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // Modal functionality
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const modalImg = document.getElementById('modalImg' + modalId.slice(-1));
-            const imgContainer = event.currentTarget;
-            const img = imgContainer.querySelector('img');
-            
-            if (img && img.src) {
-                modalImg.src = img.src;
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
+        // Loading screen functionality
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').classList.add('show');
+            }, 1000);
+        }, 3000);
+
+        // Create sparkles
+        function createSparkle() {
+            const sparklesContainer = document.getElementById('sparkles');
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            sparklesContainer.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 5000);
         }
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('show');
-            document.body.style.overflow = 'auto';
+        // Generate sparkles continuously
+        setInterval(createSparkle, 300);
+
+        // Facebook link handler
+        function showFacebookPrompt() {
+            alert("Please replace '#' in the HTML with your actual Facebook profile URL! 💕");
         }
 
-        // Close modal on escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal('modal1');
-                closeModal('modal2');
-            }
-        });
-
-        // Prevent modal from closing when clicking on the image
-        document.querySelectorAll('.modal-content').forEach(content => {
-            content.addEventListener('click', function(event) {
-                event.stopPropagation();
+        // Add some interactivity to photos
+        document.querySelectorAll('.photo-placeholder').forEach(photo => {
+            photo.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
             });
         });
+
+        // Smooth scrolling for mobile
+        document.addEventListener('touchstart', function(){}, true);
     </script>
 </body>
 </html>
