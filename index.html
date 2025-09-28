@@ -107,7 +107,7 @@
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             animation: titleGlow 3s ease-in-out infinite alternate;
             text-shadow: 2px 2px 10px rgba(255,255,255,0.3);
@@ -159,6 +159,11 @@
         .section:nth-child(2) { animation-delay: 0.2s; }
         .section:nth-child(3) { animation-delay: 0.4s; }
         .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+        .section:nth-child(6) { animation-delay: 1.0s; }
+        .section:nth-child(7) { animation-delay: 1.2s; }
+        .section:nth-child(8) { animation-delay: 1.4s; }
+        .section:nth-child(9) { animation-delay: 1.6s; }
 
         @keyframes slideInUp {
             to {
@@ -168,7 +173,7 @@
         }
 
         .section h2 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 2rem;
             text-align: center;
             position: relative;
@@ -194,50 +199,50 @@
             position: relative;
         }
 
-        .photo-placeholder {
+        .photo-container img {
             width: 100%;
             max-width: 400px;
-            height: 300px;
-            background: linear-gradient(45deg, #5dade2, #85c1e9);
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .photo-container img:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(135,206,235,0.6);
+            border-color: rgba(135,206,235,0.8);
+        }
+
+        .photo-container {
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
         }
 
-        .photo-placeholder:hover {
-            transform: scale(1.05);
-        }
-
-        .photo-placeholder::before {
+        .photo-container::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: photoShimmer 4s ease-in-out infinite;
+            pointer-events: none;
+            border-radius: 20px;
         }
 
-        .photo-placeholder:hover::before {
-            left: 100%;
-        }
-
-        .photo-text {
-            font-size: 1.1rem;
-            color: white;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        @keyframes photoShimmer {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
         }
 
         .message {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             line-height: 1.8;
             text-align: center;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -300,6 +305,127 @@
             100% { opacity: 0; transform: translateY(-100px) rotate(180deg); }
         }
 
+        /* Additional stunning animations */
+        .floating-bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle, rgba(135,206,235,0.3), rgba(173,216,230,0.1));
+            border-radius: 50%;
+            animation: bubbleFloat 8s linear infinite;
+        }
+
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .heart-rain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: #87ceeb;
+            font-size: 1.2rem;
+            animation: heartFall 6s linear infinite;
+        }
+
+        @keyframes heartFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(135,206,235,0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseRing 4s ease-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .message::after {
+            content: '💙';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: heartPulse 2s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.3); }
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .container {
@@ -307,7 +433,7 @@
             }
 
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 1.9rem;
             }
 
             .section {
@@ -315,11 +441,11 @@
             }
 
             .section h2 {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
             }
 
             .message {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .loading-text {
@@ -355,19 +481,25 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-heart">💙</div>
-        <div class="loading-text">Welcome, Honey ✨</div>
-        <div class="loading-subtext">Something special awaits you, Baby 💕</div>
+        <div class="loading-text">welcome, pretty</div>
+        <div class="loading-subtext">something special awaits you, baby</div>
     </div>
 
     <!-- Sparkles Background -->
     <div class="sparkles" id="sparkles"></div>
+    
+    <!-- Floating Bubbles Background -->
+    <div class="floating-bubbles" id="bubbles"></div>
+    
+    <!-- Heart Rain Background -->
+    <div class="heart-rain" id="heartRain"></div>
 
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <div class="container">
             <!-- Header -->
             <div class="header">
-                <h1>🎉 Happy Birthday, My Beautiful Love! 🎉</h1>
+                <h1>🎉 happy birthday, my stunningly gorgeous baby</h1>
                 <div class="floating-icons">
                     <span>💕</span>
                     <span>✨</span>
@@ -378,14 +510,19 @@
 
             <!-- First Section: Birthday Greeting -->
             <div class="section">
-                <h2>💙 You Are Simply Incredible 💙</h2>
+                <h2>💙 you Are simply stunning</h2>
                 <div class="photo-container">
-                    <div class="photo-placeholder">
-                        <div class="photo-text">📷 photo1.jpg<br>Our Beautiful Beginning</div>
-                    </div>
-                </div>
+                    <img src="data:image/jpeg;base64,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" alt="Beautiful beach photo" />
                 <div class="message">
                     From that magical first conversation on May 17, 2025, to this very moment, you have continuously amazed me with your incredible personality and radiant well-being. Every day with you feels like discovering a new treasure, and I find myself falling deeper in love with who you are. Your laugh, your kindness, your brilliant mind - everything about you is absolutely incomparable. No one else could ever hold a candle to the light you bring into this world. You're not just my girlfriend; you're my inspiration, my joy, and the most extraordinary person I've ever had the privilege to know. Happy birthday to the most amazing soul! 🌟💕
+                </div>
+            </div>
+
+            <!-- New Section: Your Beautiful Qualities -->
+            <div class="section">
+                <h2>✨ Your Radiant Qualities ✨</h2>
+                <div class="message">
+                    Your smile could light up the darkest room, and your laughter is the most beautiful melody I've ever heard. The way you care for others, your gentle heart, and your incredible strength inspire me every single day. You have this amazing ability to make everyone around you feel special and loved. Your intelligence sparkles in every conversation we have, and your wisdom guides me through life's challenges. You are graceful, elegant, and possess a beauty that radiates from within. Every quality about you makes me grateful to call you mine. You are truly one of a kind, my darling. 💫🌸
                 </div>
             </div>
 
@@ -393,12 +530,33 @@
             <div class="section">
                 <h2>🤝 Our Soulmate Connection 🤝</h2>
                 <div class="photo-container">
-                    <div class="photo-placeholder">
-                        <div class="photo-text">📷 photo2.jpg<br>Our Precious Moments</div>
-                    </div>
-                </div>
+                    <img src="data:image/jpeg;base64,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" alt="Pinky promise hands" />
                 <div class="message">
                     The way we understand each other goes beyond words - it's like we share the same heart and soul. Your patience with me, your genuine nature, and the purity of your love have created something so beautiful between us. We're like two puzzle pieces that fit perfectly together, bound by countless pinky promises and sealed with endless love. Every shared glance, every quiet moment, every laugh we've shared has woven us together in ways that feel destined. You truly are my soulmate, and I cherish every second of this incredible journey we're on together. 💫👫
+                </div>
+            </div>
+
+            <!-- New Section: Our Adventures -->
+            <div class="section">
+                <h2>🌟 Our Wonderful Adventures 🌟</h2>
+                <div class="message">
+                    From our late-night conversations that stretch until dawn to our spontaneous adventures that become cherished memories, every moment with you is an adventure I treasure. The way we can talk about everything and nothing, how we support each other's dreams, and how we create magic in the simplest moments together - these are the memories I hold closest to my heart. Whether we're exploring new places, trying new foods, or just sitting in comfortable silence, you make every experience extraordinary. Our love story is my favorite adventure, and I can't wait to write more beautiful chapters with you. 🗺️💕
+                </div>
+            </div>
+
+            <!-- New Section: Future Dreams -->
+            <div class="section">
+                <h2>🌈 Our Beautiful Future 🌈</h2>
+                <div class="message">
+                    When I think about our future together, my heart fills with so much excitement and love. I dream of all the birthdays we'll celebrate together, all the sunrises and sunsets we'll watch, all the dreams we'll chase and achieve side by side. I imagine us growing old together, still laughing at each other's jokes, still holding hands, still looking at each other like we're the luckiest people in the world. With you, I see a future filled with love, laughter, adventure, and endless happiness. You are my forever, my always, and my happily ever after. 🌅💍
+                </div>
+            </div>
+
+            <!-- New Section: What You Mean to Me -->
+            <div class="section">
+                <h2>💝 What You Mean to Me 💝</h2>
+                <div class="message">
+                    You are my peace in chaos, my strength when I'm weak, my joy when I'm sad, and my hope when I'm lost. You've taught me what true love feels like - not just the butterflies and excitement, but the deep, soul-level connection that makes everything in life better. You've shown me that home isn't a place, it's a person - and you are my home. When I'm with you, I feel complete, understood, and infinitely loved. You've made me a better person just by being yourself and loving me unconditionally. My heart belongs to you completely and forever. 🏠❤️
                 </div>
             </div>
 
@@ -406,12 +564,17 @@
             <div class="section">
                 <h2>🙏 My Guiding Light 🙏</h2>
                 <div class="photo-container">
-                    <div class="photo-placeholder">
-                        <div class="photo-text">📷 photo3.jpg<br>You Are My Everything</div>
-                    </div>
-                </div>
+                    <img src="data:image/jpeg;base64,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" alt="Beautiful selfie portrait" />
                 <div class="message">
                     I cannot express how deeply grateful I am to have you as the brilliant light in my life. Before you, my world felt incomplete, like I was wandering in darkness without knowing what I was searching for. But you... you illuminated everything. You gave my life meaning, purpose, and a joy I never knew was possible. Without you, my days would be empty, my heart would be hollow, and my life would feel utterly worthless. You are my sun, my moon, my stars - you are everything that makes life worth living. Thank you for choosing to share your beautiful heart with me. I love you beyond words, beyond time, beyond everything. 💖🌅
+                </div>
+            </div>
+
+            <!-- New Section: Birthday Wishes -->
+            <div class="section">
+                <h2>🎂 My Birthday Wishes For You 🎂</h2>
+                <div class="message">
+                    On this special day, I wish you all the happiness your beautiful heart can hold. May this new year of your life be filled with incredible adventures, amazing opportunities, and dreams coming true. I wish you laughter that never ends, love that never fades, and joy that multiplies with each passing day. May you always know how deeply you are loved and how much you mean to not just me, but to everyone whose life you've touched. I wish you health, prosperity, and all the beautiful things life has to offer. Most importantly, I wish you the knowledge that you are absolutely perfect just as you are. Happy birthday, my love! 🎁✨
                 </div>
             </div>
 
@@ -452,18 +615,73 @@
         // Generate sparkles continuously
         setInterval(createSparkle, 300);
 
+        // Create floating bubbles
+        function createBubble() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            const size = Math.random() * 60 + 20;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * 100 + 'vw';
+            bubble.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            bubble.style.animationDelay = Math.random() * 2 + 's';
+            
+            bubblesContainer.appendChild(bubble);
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 10000);
+        }
+
+        // Generate bubbles
+        setInterval(createBubble, 800);
+
+        // Create falling hearts
+        function createFallingHeart() {
+            const heartContainer = document.getElementById('heartRain');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.innerHTML = '💙';
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (Math.random() * 0.8 + 0.8) + 'rem';
+            
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Generate falling hearts
+        setInterval(createFallingHeart, 1500);
+
+        // Add pulse rings to sections
+        document.querySelectorAll('.section').forEach((section, index) => {
+            setTimeout(() => {
+                const ring = document.createElement('div');
+                ring.className = 'pulse-ring';
+                section.style.position = 'relative';
+                section.appendChild(ring);
+            }, index * 200);
+        });
+
         // Facebook link handler
         function showFacebookPrompt() {
             alert("Please replace '#' in the HTML with your actual Facebook profile URL! 💕");
         }
 
         // Add some interactivity to photos
-        document.querySelectorAll('.photo-placeholder').forEach(photo => {
+        document.querySelectorAll('.photo-container img').forEach(photo => {
             photo.addEventListener('click', function() {
                 this.style.transform = 'scale(1.1) rotate(2deg)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
-                }, 200);
+                }, 300);
             });
         });
 
