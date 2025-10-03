@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love ✨</title>
+    <title>Happy Birthday, My Erich ✨</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +17,558 @@
             color: #ffffff;
             overflow-x: hidden;
             padding-top: 80px;
+        }
+
+
+        /* Added dashboard styles */
+        .dashboard {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .dashboard.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        .dashboard-header p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            border: 2px solid rgba(255,255,255,0.25);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dashboard-card:hover::before {
+            opacity: 1;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(135, 206, 235, 0.4);
+            border-color: rgba(135, 206, 235, 0.6);
+        }
+
+        .dashboard-card-icon {
+            /* Replacing text metrics with visual metric displays */
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Adding circular progress ring styles for visual metrics */
+        .metric-circle {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+
+        .metric-circle svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .metric-circle-bg {
+            fill: none;
+            stroke: rgba(255, 215, 0, 0.2);
+            stroke-width: 8;
+        }
+
+        .metric-circle-progress {
+            fill: none;
+            stroke: #ffd700;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 339;
+            stroke-dashoffset: 0;
+            animation: progressAnimation 2s ease-out forwards;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes progressAnimation {
+            from { stroke-dashoffset: 339; }
+            to { stroke-dashoffset: var(--progress-offset); }
+        }
+
+        .metric-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .metric-value small {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+        }
+
+        /* Adding bar chart styles for visual metrics */
+        .metric-bars {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+        }
+
+        .metric-bar {
+            width: 18px;
+            background: linear-gradient(180deg, #ffd700 0%, rgba(255, 215, 0, 0.4) 100%);
+            border-radius: 4px 4px 0 0;
+            animation: barGrow 1.5s ease-out forwards;
+            transform-origin: bottom;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        @keyframes barGrow {
+            from { height: 0; }
+            to { height: var(--bar-height); }
+        }
+
+        .metric-bar:nth-child(1) { --bar-height: 60%; animation-delay: 0.1s; }
+        .metric-bar:nth-child(2) { --bar-height: 85%; animation-delay: 0.2s; }
+        .metric-bar:nth-child(3) { --bar-height: 100%; animation-delay: 0.3s; }
+        .metric-bar:nth-child(4) { --bar-height: 75%; animation-delay: 0.4s; }
+
+        /* Adding infinity symbol styles for visual metrics */
+        .metric-infinity {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #ffd700;
+            animation: infinityPulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+        }
+
+        @keyframes infinityPulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Adding counter styles for visual metrics */
+        .metric-counter {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(135, 206, 235, 0.2));
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-counter-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            animation: countUp 2s ease-out;
+        }
+
+        .metric-counter-label {
+            font-size: 0.85rem;
+            color: #87ceeb;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Adding clock/24-7 visual styles */
+        .metric-clock {
+            width: 120px;
+            height: 120px;
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(135, 206, 235, 0.1));
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-clock::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 35px;
+            background: #ffd700;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(90deg);
+            border-radius: 2px;
+            animation: clockTick 2s ease-in-out infinite;
+        }
+
+        .metric-clock::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 25px;
+            background: #87ceeb;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(180deg);
+            border-radius: 2px;
+            animation: clockTick 3s ease-in-out infinite;
+        }
+
+        @keyframes clockTick {
+            0%, 100% { transform: translate(-50%, -100%) rotate(var(--start-angle, 90deg)); }
+            50% { transform: translate(-50%, -100%) rotate(calc(var(--start-angle, 90deg) + 180deg)); }
+        }
+
+        .metric-clock-center {
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Adding progress arrow styles */
+        .metric-arrow {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .metric-arrow-track {
+            width: 100px;
+            height: 8px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-arrow-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #87ceeb);
+            border-radius: 4px;
+            animation: arrowProgress 2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes arrowProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .metric-arrow-head {
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid #87ceeb;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            filter: drop-shadow(0 0 8px rgba(135, 206, 235, 0.8));
+            animation: arrowAppear 2s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes arrowAppear {
+            0% { opacity: 0; right: -20px; }
+            100% { opacity: 1; right: -5px; }
+        }
+
+        /* Adding milestone/birthday counter styles */
+        .metric-milestone {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(135, 206, 235, 0.3));
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-milestone::before {
+            content: '🎂';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.2;
+            animation: cakeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes cakeFloat {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .metric-milestone-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .metric-milestone-label {
+            font-size: 0.8rem;
+            color: #87ceeb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+
+        .dashboard-card p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .dashboard-card:hover .dashboard-card-icon {
+            transform: scale(1.05);
+        }
+
+        /* Added back-to-menu button styles with display: none by default */
+        .back-to-menu {
+            position: fixed;
+            top: 85px;
+            left: 20px;
+            background: linear-gradient(135deg, #5dade2, #3498db);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(93, 173, 226, 0.4);
+            z-index: 1000;
+            display: none;
+        }
+
+        .back-to-menu.show {
+            display: block;
+        }
+
+        .back-to-menu:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(93, 173, 226, 0.6);
+            background: linear-gradient(135deg, #3498db, #5dade2);
+        }
+
+        /* Added content-section styles for show/hide functionality */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .content-section.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Login screen styles */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #002366 0%, #1e40af 50%, #0047ab 100%);
+            background-size: 200% 200%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            animation: royalShimmer 6s ease-in-out infinite;
+        }
+
+        .login-screen.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.98) 0%, rgba(0, 71, 171, 0.98) 100%);
+            padding: 3rem 2.5rem;
+            border-radius: 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(135, 206, 235, 0.2);
+            border: 2px solid rgba(135, 206, 235, 0.4);
+            animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .login-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .login-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .login-input {
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 2px solid rgba(135, 206, 235, 0.4);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+        }
+
+        .login-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: rgba(135, 206, 235, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(135, 206, 235, 0.4);
+        }
+
+        .login-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #5dade2, #3498db);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(93, 173, 226, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(93, 173, 226, 0.6);
+            background: linear-gradient(135deg, #3498db, #5dade2);
+        }
+
+        .login-error {
+            color: #ff6b9d;
+            font-size: 1rem;
+            margin-top: -0.5rem;
+            display: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-error.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .login-hint {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
         }
 
         /* Top Navigation Bar */
@@ -53,21 +605,6 @@
         @keyframes shimmerText {
             0% { background-position: 0% center; }
             100% { background-position: 200% center; }
-        }
-
-        .loading-text {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-            animation: slideUp 2s ease-out;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .loading-subtext {
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            opacity: 0.8;
-            animation: slideUp 2s ease-out 0.5s both;
         }
 
         .greeting-icon {
@@ -264,6 +801,10 @@
 
         .loading-screen.fade-out {
             animation: fadeOut 1s ease-out forwards;
+        }
+
+        .loading-screen.hidden {
+            display: none;
         }
 
         @keyframes royalShimmer {
@@ -467,7 +1008,7 @@
         .flower-sparkle:nth-child(8) { animation-delay: 4.2s; }
 
         .loading-text {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             text-align: center;
             animation: slideUp 2s ease-out;
@@ -475,7 +1016,7 @@
         }
 
         .loading-subtext {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-top: 1rem;
             opacity: 0.8;
             animation: slideUp 2s ease-out 0.5s both;
@@ -839,6 +1380,119 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
+        /* Video Modal Styles */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            display: block;
+            border-radius: 15px;
+        }
+
+        .video-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .video-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .video-close::before,
+        .video-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: white;
+        }
+
+        .video-close::before {
+            transform: rotate(45deg);
+        }
+
+        .video-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .treasure-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            background-size: 200% auto;
+            color: #002366;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 2rem auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            text-align: center;
+            animation: treasureGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes treasureGlow {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.8);
+                transform: translateY(-5px);
+            }
+        }
+
+        .treasure-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 45px rgba(255, 215, 0, 0.8);
+            background-position: right center;
+        }
+
         .footer {
             text-align: center;
             padding: 3rem 2rem;
@@ -1014,6 +1668,113 @@
             body {
                 padding-top: 70px;
             }
+
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-container h1 {
+                font-size: 2rem;
+            }
+
+            .login-container p {
+                font-size: 1rem;
+            }
+
+            .treasure-button {
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+            }
+
+            .video-container {
+                max-width: 95%;
+            }
+
+            /* Mobile responsive dashboard */
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-header p {
+                font-size: 1.2rem;
+            }
+
+            .dashboard-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .dashboard-card-icon {
+                /* Mobile responsive sizing for visual metrics */
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-value {
+                font-size: 1.4rem;
+            }
+
+            .metric-bars {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-infinity {
+                font-size: 3rem;
+            }
+
+            .metric-counter {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-counter-number {
+                font-size: 1.8rem;
+            }
+
+            .metric-clock {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-arrow {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-milestone {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-milestone-number {
+                font-size: 2rem;
+            }
+
+            .dashboard-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .dashboard-card p {
+                font-size: 1rem;
+            }
+
+            .back-to-menu {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                /* Adjusting mobile position to be below header */
+                top: 80px;
+                left: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1028,13 +1789,273 @@
             .greeting-content p {
                 font-size: 1.1rem;
             }
+
+            .login-container h1 {
+                font-size: 1.7rem;
+            }
+
+            .login-container p {
+                font-size: 0.95rem;
+            }
+
+            .login-input {
+                font-size: 1rem;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .treasure-button {
+                font-size: 1.1rem;
+                padding: 0.9rem 1.8rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .dashboard-header p {
+                font-size: 1rem;
+            }
+        }
+
+        /* CHANGE: Added Love Game styles */
+        .metric-heart {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .heart-pulse {
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.6));
+        }
+
+        .love-game-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-progress {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ff1744);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .game-question {
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .game-question h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .game-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .game-option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            border-radius: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .game-option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateX(10px);
+        }
+
+        .game-option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .game-option-btn.correct {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-color: #38ef7d;
+            animation: correctPulse 0.5s ease;
+        }
+
+        .game-option-btn.wrong {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            border-color: #f45c43;
+            animation: wrongShake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .game-result {
+            text-align: center;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .game-result.hidden {
+            display: none;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: bounceIn 0.8s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-restart-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .game-restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .love-game-container {
+                padding: 1.5rem;
+            }
+
+            .game-question h3 {
+                font-size: 1.4rem;
+            }
+
+            .game-option-btn {
+                padding: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .result-title {
+                font-size: 2rem;
+            }
+
+            .result-message {
+                font-size: 1rem;
+            }
+
+            .result-icon {
+                font-size: 4rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Top Navigation Bar -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <h1>Yo, Hon!</h1>
+            <p>Enter password to continue</p>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <input 
+                    type="text" 
+                    id="dateInput" 
+                    class="login-input" 
+                    placeholder="MM/DD/YY or Month DD, YYYY"
+                    autocomplete="off"
+                />
+                <div class="login-error" id="loginError">
+                    Oops! That's not the right date, baby. Try again!
+                </div>
+                <button type="submit" class="login-button">Enter</button>
+                <p class="login-hint">Hint: Happy Birthday, Honey!!</p>
+            </form>
+        </div>
+    </div>
+
     <div class="top-nav">
-        <div class="love-message">I Love You Forever My Birthday Girl</div>
+        <div class="love-message">I Love You Forever Doc. Erich Anne Guevarra Palanca</div>
         <div class="greeting-icon" onclick="openGreeting()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -1042,7 +2063,6 @@
         </div>
     </div>
 
-    <!-- Greeting Popup -->
     <div class="greeting-popup" id="greetingPopup" onclick="closeGreeting()">
         <div class="greeting-content" onclick="event.stopPropagation()">
             <span class="popup-sparkle">✨</span>
@@ -1050,13 +2070,15 @@
             <span class="popup-sparkle">✨</span>
             <span class="popup-sparkle">✨</span>
             <h2>Happy 20th Birthday! 🎉</h2>
-            <p>Bakit ikaw napakaganda mo?!?! I love you baby! 💙</p>
+            <p>I love you so much, baby!</p>
             <button class="close-popup" onclick="closeGreeting()">Close</button>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="treasure-button" onclick="openVideo()">See treasure 🎁</button>
+            </div>
         </div>
     </div>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
+    <div class="loading-screen hidden" id="loadingScreen">
         <div class="flower-container">
             <div class="blue-flower">
                 <div class="petal"></div>
@@ -1097,16 +2119,168 @@
         <div class="loading-subtext">something special awaits you, by your ever loving boyfriend -claude</div>
     </div>
 
+    <div class="video-modal" id="videoModal" onclick="closeVideo()">
+        <div class="video-container" onclick="event.stopPropagation()">
+            <div class="video-close" onclick="closeVideo()"></div>
+            <video id="birthdayVideo" controls>
+                <source src="BirthdayVideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <div class="sparkles" id="sparkles"></div>
     <div class="side-particles left" id="leftParticles"></div>
     <div class="side-particles right" id="rightParticles"></div>
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Full size" />
+        <img id="lightbox-img" src="/placeholder.svg" alt="Full size" />
     </div>
 
-    <div class="main-content" id="mainContent">
+    <button class="back-to-menu" id="backToMenu" onclick="showDashboard()">← Back to Menu</button>
+
+    <div class="dashboard" id="dashboard">
+        <div class="dashboard-header">
+            <h1>Choose Your Journey, Pretty</h1>
+            <p>Select a section to read my heartfelt messages for you</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card" onclick="showSection('section1')">
+                <!-- Replaced text metric with circular progress visual (100% stunning) -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="metric-circle-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="metric-circle-progress" cx="60" cy="60" r="54" style="--progress-offset: 0;"></circle>
+                        </svg>
+                        <div class="metric-value">100%<small>Stunning</small></div>
+                    </div>
+                </div>
+                <h3>Simply Stunning</h3>
+                <p>Discover how beautiful you are to me from the very first moment</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section2')">
+                <!-- Replaced text metric with bar chart visual (1000+ qualities) -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-bars">
+                        <div class="metric-bar"></div>
+                        <div class="metric-bar"></div>
+                        <div class="metric-bar"></div>
+                        <div class="metric-bar"></div>
+                    </div>
+                    <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1.2rem;">1000+ Qualities</div>
+                </div>
+                <h3>Attractive Qualities</h3>
+                <p>All the amazing qualities that make you uniquely you</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section3')">
+                <!-- Replaced text metric with infinity symbol visual -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-infinity">∞</div>
+                    <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Forever Connected</div>
+                </div>
+                <h3>Soulmate Connection</h3>
+                <p>How we're perfectly meant for each other</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section4')">
+                <!-- Replaced text metric with counter visual (365 days) -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-counter">
+                        <div class="metric-counter-number">365</div>
+                        <div class="metric-counter-label">Days of Joy</div>
+                    </div>
+                </div>
+                <h3>Wonderful Moments</h3>
+                <p>Our beautiful memories and adventures together</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section5')">
+                <!-- Replaced text metric with infinity love meter visual -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="metric-circle-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="metric-circle-progress" cx="60" cy="60" r="54" style="--progress-offset: 0;"></circle>
+                        </svg>
+                        <div class="metric-value">∞<small>Love</small></div>
+                    </div>
+                </div>
+                <h3>You Being You</h3>
+                <p>Why you mean everything to me</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section6')">
+                <!-- Replaced text metric with clock visual (24/7) -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-clock">
+                        <div class="metric-clock-center"></div>
+                    </div>
+                    <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1.2rem;">24/7 Thinking</div>
+                </div>
+                <h3>My Guiding Light</h3>
+                <p>How you illuminate my entire world</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section7')">
+                <!-- Replaced text metric with progress arrow visual -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-arrow">
+                        <div class="metric-arrow-track">
+                            <div class="metric-arrow-progress"></div>
+                            <div class="metric-arrow-head"></div>
+                        </div>
+                    </div>
+                    <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Endless Future</div>
+                </div>
+                <h3>Moving Forward</h3>
+                <p>Our beautiful future together</p>
+            </div>
+
+            <div class="dashboard-card" onclick="showSection('section8')">
+                <!-- Replaced text metric with milestone visual (20 years) -->
+                <div class="dashboard-card-icon">
+                    <div class="metric-milestone">
+                        <div class="metric-milestone-number">20</div>
+                        <div class="metric-milestone-label">Years of You</div>
+                    </div>
+                </div>
+                <h3>Birthday Wishes</h3>
+                <p>My special wishes for you on your day</p>
+            </div>
+
+            <!-- CHANGE: Added new Love Game card -->
+            <div class="dashboard-card" onclick="showSection('loveGame')">
+                <div class="dashboard-card-icon">
+                    <div class="metric-heart">
+                        <svg viewBox="0 0 120 120" style="width: 100%; height: 100%;">
+                            <path class="heart-pulse" d="M60,100 C60,100 20,70 20,45 C20,30 30,20 42,20 C50,20 56,24 60,30 C64,24 70,20 78,20 C90,20 100,30 100,45 C100,70 60,100 60,100 Z" fill="#ff6b9d" stroke="#ff1744" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Test Your Love</div>
+                </div>
+                <h3>Love Game</h3>
+                <p>Answer questions about how much you love me</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>✨ Ready to tell me your thoughts about this website birthday greeting I created for the very first time just for you hon?</h3>
+            <p>I'm waiting for your message!</p>
+            <a href="https://www.facebook.com/k1odyy" target="_blank" class="cta-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Message me here baby
+            </a>
+        </div>
+    </div>
+
+    <div class="content-section" id="section1">
         <div class="container">
             <div class="header">
                 <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
@@ -1127,12 +2301,20 @@
                 <span class="floating-particle"></span>
                 <h2>✨ Baby, You Are Simply Stunning</h2>
                 <div class="photo-container">
-                    <img id="photo1" src="photo1.jpg" alt="Beautiful" />
+                    <img id="photo1" src="photo1.jpg" alt="Beautiful" onclick="openLightbox('photo1.jpg')" />
                 </div>
                 <div class="message">
-                    Baby, from that unforgettable first conversation wayback may 17, 2025, to this very moment, you have continuously amazed me with your lovely personality and radiant well-being. Every day with you feels like discovering a new treasure hon, and I find myself falling deeper in love with who you are. Remember the blue flowers I gave you on our first meet? of course yes, since we have just talked about it recently, you know hon from that day when I saw your laugh, your kindness, your mindset -I always say that everything about you is absolutely incomparable. 
+                    Baby, from that unforgettable first conversation way back may 17, 2025, to this very moment, you have continuously amazed me with your lovely personality and radiant well-being. Every day with you feels like discovering a new treasure hon, and I find myself falling deeper in love with who you are. Remember the blue flowers I gave you on our first meet? of course yes, since we have just talked about it recently, you know hon from that day when I saw your laugh, your kindness, your mindset -I always say that everything about you is absolutely incomparable. 
                     Baby, you know what, there's no one else could ever hold a candle to the light you bring into my world. You're not just my girlfriend talaga, you're my inspiration, my joy, my life and the most extraordinary person I've ever had the privilege to know -ultimately you are my source of strength hon for real. Happy birthday to the most amazing soul! my soulmate, i love you baby!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section2">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
             </div>
 
             <div class="section">
@@ -1150,7 +2332,7 @@
                 <span class="floating-particle"></span>
                 <h2>✨ Your Attractive Qualities</h2>
                 <div class="photo-container">
-                    <img id="photo4" src="photo4.jpg" alt="Beautiful" />
+                    <img id="photo4" src="photo4.jpg" alt="Beautiful" onclick="openLightbox('photo4.jpg')" />
                 </div>
                 <div class="message">
                     Honey, I'm telling you -your smile could light up the darkest room, and your laughter is the most beautiful melody I've ever heard. 
@@ -1159,6 +2341,14 @@
                     Baby, you are graceful, elegantly beautiful girly, naughty lovey dovey, and I SWEAR HON you possess a beauty that radiates from within me, kaya baliw na baliw ako sayo. 
                     Every quality about you makes me grateful to call you mine hon. You are truly one of a kind, my pretty erich, i love you so much!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section3">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
             </div>
 
             <div class="section">
@@ -1176,7 +2366,7 @@
                 <span class="floating-particle"></span>
                 <h2>✨ Soulmate Connection</h2>
                 <div class="photo-container">
-                    <img id="photo2" src="photo2.jpg" alt="Connection" />
+                    <img id="photo2" src="photo2.jpg" alt="Connection" onclick="openLightbox('photo2.jpg')" />
                 </div>
                 <div class="message">
                     The way we understand each other goes beyond words -baby, it's like we share the same heart and soul for realll. 
@@ -1185,6 +2375,14 @@
                     Every shared glance, every quiet moment, every laugh we've shared has woven us together in ways that feel destined. 
                     Baby, you truly are my soulmate, and I cherish every second of this incredible journey we're on together. Mahal na mahal kita baby ko!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section4">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
             </div>
 
             <div class="section">
@@ -1202,7 +2400,7 @@
                 <span class="floating-particle"></span>
                 <h2>✨ Wonderful Moments Together</h2>
                 <div class="photo-container">
-                    <img id="photo6" src="photo6.jpg" alt="Us" />
+                    <img id="photo6" src="photo6.jpg" alt="Us" onclick="openLightbox('photo6.jpg')" />
                 </div>
                 <div class="message">
                     From our late-night conversations that stretch until dawn to our spontaneous meet ups that become cherished memories, and baby, every moment with you is an adventure I treasure. 
@@ -1210,6 +2408,14 @@
                     Baby, whether we're exploring new places, trying new foods, or just sitting in comfortable silence, you make every experience unforgettable. 
                     Honey, our love story is my favorite adventure, and I can't wait to write more beautiful chapters with you. I love you so much -a lot!!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section5">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
             </div>
 
             <div class="section">
@@ -1227,7 +2433,7 @@
                 <span class="floating-particle"></span>
                 <h2>✨ You being you</h2>
                 <div class="photo-container">
-                    <img id="photo5" src="photo5.jpg" alt="You" />
+                    <img id="photo5" src="photo5.jpg" alt="You" onclick="openLightbox('photo5.jpg')" />
                 </div>
                 <div class="message">
                     You are my peace in problems, my strength when I'm weak, my joy when I'm sad, my rest-place when I'm tired, my safe-place when I'm down, and my hope when I'm lost. 
@@ -1236,6 +2442,14 @@
                     When I'm with you, I feel complete, understood, and infinitely loved. 
                     You've made me a better person just by being yourself and by loving me unconditionally. My heart belongs to you completely and forever, erich. sobrang mahal na mahal kita!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section6">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
             </div>
 
             <div class="section">
@@ -1253,7 +2467,7 @@
                 <span class="floating-particle"></span>
                 <h2>✨ My Guiding Light</h2>
                 <div class="photo-container">
-                    <img id="photo3" src="photo3.jpg" alt="Light" />
+                    <img id="photo3" src="photo3.jpg" alt="Light" onclick="openLightbox('photo3.jpg')" />
                 </div>
                 <div class="message">
                     Baby, I cannot express how deeply grateful I am to have you as the light in my life. Before you, my world felt incomplete, like I was wandering in darkness without knowing what I was searching for and I already shared them to you, yet here we are always accepting each other's past experience and flaws along the way. 
@@ -1262,6 +2476,14 @@
                     You are my sun, baby baby you're my sun and moon, my stars -you are everything that makes life worth living. 
                     Doc. Erich Anne Guevarra Palanca, Thank you for choosing to share your beautiful heart with me. I love you beyond words, beyond time, and beyond everything.
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section7">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
             </div>
 
             <div class="section">
@@ -1286,6 +2508,14 @@
                     You are my forever hon, my life, and my happily ever after. I love you very much!
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="content-section" id="section8">
+        <div class="container">
+            <div class="header">
+                <h1>Happy Birthday, My Stunningly Gorgeous Baby 🎉</h1>
+            </div>
 
             <div class="section">
                 <span class="floating-particle"></span>
@@ -1300,66 +2530,155 @@
                 <span class="floating-particle"></span>
                 <span class="floating-particle"></span>
                 <span class="floating-particle"></span>
-                <h2>✨ My Birthday Wishes For You</h2>
+                <h2>✨ Birthday Wishes</h2>
                 <div class="message">
-                    Baby, on this special day, I wish you all the happiness your beautiful heart can hold. 
-                    May this new year of your life be filled with amazing opportunities, and dreams coming true. 
-                    Honey, I wish you laughter that never ends, love that never fades, and joy that multiplies with each passing day. 
-                    May you always know how deeply you are loved and how much you mean to not just me, but to everyone whose life you've touched. 
-                    I wish you good health since I feel uneasy every time you're not feeling well, I wish you prosperity, and all the pretty things in life. 
-                    Baby, I wish you the knowledge that you are absolutely stunning just as you are, remember that. Happy birthday my erich, my beautiful girlfriend!
+                    Baby, on this special day, I wish you all the happiness in the world. 
+                    May your dreams come true, may your heart always be filled with joy, and may our love continue to grow stronger with each passing day. 
+                    Happy 20th birthday, my love! Here's to many more years of laughter, love, and beautiful memories together. 
+                    I love you more than words can express, and I'm so grateful to celebrate this day with you. 
+                    You deserve all the best things in life, and I promise to always be by your side, supporting you, loving you, and cherishing every moment we share. 
+                    Happy birthday, my beautiful baby! 🎂🎉💙
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="footer">
-                <h3>✨ Ready to tell me your thoughts about this website birthday greeting I created for the very first time just for you hon?</h3>
-                <p>I'm waiting for your message!</p>
-                <a href="https://www.facebook.com/k1odyy" target="_blank" class="cta-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 8px;">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    Message me here baby
-                </a>
+     <!-- CHANGE: Added new Love Game section -->
+    <div class="content-section" id="loveGame">
+        <div class="container">
+            <div class="header">
+                <h1>How Much Do I Love You? 💕</h1>
+            </div>
+
+            <div class="section">
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                <span class="floating-particle"></span>
+                
+                <div class="love-game-container">
+                    <div class="game-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="gameProgress"></div>
+                        </div>
+                        <div class="progress-text">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span></div>
+                    </div>
+
+                    <div class="game-question-container" id="gameQuestionContainer">
+                         Questions will be dynamically inserted here 
+                    </div>
+
+                    <div class="game-result hidden" id="gameResult">
+                        <div class="result-icon">💖</div>
+                        <h2 class="result-title">Perfect Score!</h2>
+                        <p class="result-message">You got it right Hon! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby! 💕</p>
+                        <button class="game-restart-btn" onclick="restartGame()">Play Again</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        setTimeout(() => {
-            document.getElementById('loadingScreen').classList.add('fade-out');
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('mainContent').classList.add('show');
-            }, 1000);
-        }, 3000);
-
-        async function loadImages() {
-            const imageMapping = {
-                'photo1': 'photo1',
-                'photo2': 'photo2',
-                'photo3': 'photo3',
-                'photo4': 'photo4',
-                'photo5': 'photo5',
-                'photo6': 'photo6'
-            };
+        // Added dashboard navigation functions
+        function showDashboard() {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('show');
+            });
             
-            for (const [photoId, fileName] of Object.entries(imageMapping)) {
-                try {
-                    const fileData = await window.fs.readFile(fileName);
-                    const blob = new Blob([fileData], { type: 'image/jpeg' });
-                    const imageUrl = URL.createObjectURL(blob);
-                    
-                    const photoElement = document.getElementById(photoId);
-                    if (photoElement) {
-                        photoElement.src = imageUrl;
-                    }
-                } catch (error) {
-                    console.log(`Could not load ${fileName}:`, error);
-                }
+            // Show dashboard
+            document.getElementById('dashboard').classList.add('show');
+            document.getElementById('backToMenu').classList.remove('show');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSection(sectionId) {
+            // Hide dashboard
+            document.getElementById('dashboard').classList.remove('show');
+            
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('show');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('show');
+            document.getElementById('backToMenu').classList.add('show');
+            
+            if (sectionId === 'loveGame') {
+                initLoveGame();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const dateInput = document.getElementById('dateInput').value.trim().toLowerCase();
+            const errorElement = document.getElementById('loginError');
+            
+            const validFormats = [
+                '10/04/05',
+                '10/4/05',
+                '10/04/2005',
+                '10/4/2005',
+                'october 4, 2005',
+                'october 4 2005',
+                'october 04, 2005',
+                'october 04 2005'
+            ];
+            
+            if (validFormats.includes(dateInput)) {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('loadingScreen').classList.remove('hidden');
+                
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').classList.add('fade-out');
+                    setTimeout(() => {
+                        document.getElementById('loadingScreen').style.display = 'none';
+                        // Show dashboard instead of main content
+                        showDashboard();
+                    }, 1000);
+                }, 3000);
+            } else {
+                errorElement.classList.add('show');
+                document.getElementById('dateInput').value = '';
+                
+                setTimeout(() => {
+                    errorElement.classList.remove('show');
+                }, 3000);
             }
         }
 
-        loadImages();
+        function openVideo() {
+            const videoModal = document.getElementById('videoModal');
+            const video = document.getElementById('birthdayVideo');
+            videoModal.classList.add('active');
+            video.play();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const videoModal = document.getElementById('videoModal');
+            const video = document.getElementById('birthdayVideo');
+            videoModal.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+            document.body.style.overflow = 'auto';
+        }
 
         function openLightbox(imageSrc) {
             const lightbox = document.getElementById('lightbox');
@@ -1376,10 +2695,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Add click listeners for images to open lightbox
             const photos = document.querySelectorAll('.photo-container img');
             photos.forEach(photo => {
-                photo.addEventListener('click', function(e) {
-                    e.stopPropagation();
+                photo.addEventListener('click', function() {
                     openLightbox(this.src);
                 });
             });
@@ -1446,6 +2765,166 @@
         function closeGreeting() {
             document.getElementById('greetingPopup').classList.remove('active');
             document.body.style.overflow = 'auto';
+        }
+
+        // Function to set progress offset for the circular progress bar
+        function setCircleProgress(value) {
+            const circumference = 2 * Math.PI * 54; // r = 54
+            const offset = circumference - (value / 100) * circumference;
+            return offset;
+        }
+
+        // Apply progress for specific metrics
+        document.addEventListener('DOMContentLoaded', function() {
+            // Section 1: Stunning
+            document.querySelector('#section1 .metric-circle-progress').style.setProperty('--progress-offset', setCircleProgress(100));
+            
+            // Section 5: Love
+            document.querySelector('#section5 .metric-circle-progress').style.setProperty('--progress-offset', setCircleProgress(100));
+        });
+
+        // CHANGE: Added Love Game functionality
+        const loveGameQuestions = [
+            {
+                question: "How much do I love you?",
+                options: [
+                    "Super a lot",
+                    "Very much",
+                    "More than anything",
+                    "So much beyond words can tell, and beyond what anyone can imagine"
+                ],
+                correct: 3
+            },
+            {
+                question: "What does your smile mean to me?",
+                options: [
+                    "It makes me happy",
+                    "It brightens my day",
+                    "It's beautiful",
+                    "It's the light that gives my life meaning"
+                ],
+                correct: 3
+            },
+            {
+                question: "How long will I love you?",
+                options: [
+                    "For a long time",
+                    "Forever",
+                    "Until the end of time",
+                    "Beyond eternity, through every lifetime, until death do us part and beyond"
+                ],
+                correct: 3
+            },
+            {
+                question: "What would I do without you?",
+                options: [
+                    "I'd be sad",
+                    "I'd miss you",
+                    "Life wouldn't be the same",
+                    "My world would be empty, meaningless, and I'd be lost in darkness"
+                ],
+                correct: 3
+            },
+            {
+                question: "How important are you to me?",
+                options: [
+                    "Very important",
+                    "The most important person",
+                    "You mean everything",
+                    "You are my reason for living, my source of strength, my purpose, my soul, and the very essence of my existence"
+                ],
+                correct: 3
+            }
+        ];
+
+        let currentGameQuestion = 0;
+        let gameScore = 0;
+
+        function initLoveGame() {
+            currentGameQuestion = 0;
+            gameScore = 0;
+            document.getElementById('gameResult').classList.add('hidden');
+            document.getElementById('gameQuestionContainer').classList.remove('hidden');
+            document.getElementById('totalQuestions').textContent = loveGameQuestions.length;
+            showGameQuestion();
+        }
+
+        function showGameQuestion() {
+            const question = loveGameQuestions[currentGameQuestion];
+            const container = document.getElementById('gameQuestionContainer');
+            
+            document.getElementById('currentQuestion').textContent = currentGameQuestion + 1;
+            const progress = ((currentGameQuestion) / loveGameQuestions.length) * 100;
+            document.getElementById('gameProgress').style.width = progress + '%';
+            
+            container.innerHTML = `
+                <div class="game-question">
+                    <h3>${question.question}</h3>
+                    <div class="game-options">
+                        ${question.options.map((option, index) => `
+                            <button class="game-option-btn" onclick="selectAnswer(${index})" data-index="${index}">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = loveGameQuestions[currentGameQuestion];
+            const buttons = document.querySelectorAll('.game-option-btn');
+            
+            buttons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex && selectedIndex !== question.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                gameScore++;
+            }
+
+            setTimeout(() => {
+                currentGameQuestion++;
+                if (currentGameQuestion < loveGameQuestions.length) {
+                    showGameQuestion();
+                } else {
+                    showGameResult();
+                }
+            }, 1500);
+        }
+
+        function showGameResult() {
+            document.getElementById('gameQuestionContainer').classList.add('hidden');
+            const resultDiv = document.getElementById('gameResult');
+            resultDiv.classList.remove('hidden');
+            
+            const progress = 100;
+            document.getElementById('gameProgress').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = loveGameQuestions.length;
+            
+            // Update result based on score
+            const resultTitle = resultDiv.querySelector('.result-title');
+            const resultMessage = resultDiv.querySelector('.result-message');
+            const resultIcon = resultDiv.querySelector('.result-icon');
+            
+            if (gameScore === loveGameQuestions.length) {
+                resultIcon.textContent = '💖';
+                resultTitle.textContent = 'Perfect Score!';
+                resultMessage.textContent = "You got it right! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby! 💕";
+            } else {
+                resultIcon.textContent = '💕';
+                resultTitle.textContent = `You got ${gameScore} out of ${loveGameQuestions.length}!`;
+                resultMessage.textContent = "But remember, no matter what answers you choose, the truth is: I love you so much beyond words can tell, and beyond what anyone can imagine. You are my world, my heart, my everything! 💖";
+            }
+        }
+
+        function restartGame() {
+            initLoveGame();
         }
     </script>
 </body>
