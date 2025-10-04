@@ -19,8 +19,7 @@
             padding-top: 80px;
         }
 
-
-        /* Added dashboard styles */
+        /* Dashboard styles */
         .dashboard {
             display: none;
             max-width: 1200px;
@@ -97,7 +96,6 @@
         }
 
         .dashboard-card-icon {
-            /* Replacing text metrics with visual metric displays */
             width: 120px;
             height: 120px;
             margin: 0 auto 1.5rem;
@@ -107,7 +105,6 @@
             position: relative;
         }
 
-        /* Adding circular progress ring styles for visual metrics */
         .metric-circle {
             width: 120px;
             height: 120px;
@@ -162,7 +159,6 @@
             margin-top: 0.2rem;
         }
 
-        /* Adding bar chart styles for visual metrics */
         .metric-bars {
             width: 120px;
             height: 120px;
@@ -192,7 +188,6 @@
         .metric-bar:nth-child(3) { --bar-height: 100%; animation-delay: 0.3s; }
         .metric-bar:nth-child(4) { --bar-height: 75%; animation-delay: 0.4s; }
 
-        /* Adding infinity symbol styles for visual metrics */
         .metric-infinity {
             width: 120px;
             height: 120px;
@@ -210,7 +205,6 @@
             50% { transform: scale(1.1); opacity: 1; }
         }
 
-        /* Adding counter styles for visual metrics */
         .metric-counter {
             width: 120px;
             height: 120px;
@@ -245,7 +239,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Adding clock/24-7 visual styles */
         .metric-clock {
             width: 120px;
             height: 120px;
@@ -301,7 +294,6 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
-        /* Adding progress arrow styles */
         .metric-arrow {
             width: 120px;
             height: 120px;
@@ -353,7 +345,6 @@
             100% { opacity: 1; right: -5px; }
         }
 
-        /* Adding milestone/birthday counter styles */
         .metric-milestone {
             width: 120px;
             height: 120px;
@@ -408,7 +399,6 @@
             transform: scale(1.05);
         }
 
-        /* Added back-to-menu button styles with display: none by default */
         .back-to-menu {
             position: fixed;
             top: 85px;
@@ -437,7 +427,6 @@
             background: linear-gradient(135deg, #3498db, #5dade2);
         }
 
-        /* Added content-section styles for show/hide functionality */
         .content-section {
             display: none;
             opacity: 0;
@@ -852,7 +841,8 @@
             left: 50%;
             transform-origin: 50% 80%;
             box-shadow: inset -2px -8px 20px rgba(52, 152, 219, 0.6), inset 2px 2px 15px rgba(255, 255, 255, 0.4), 0 8px 25px rgba(74, 144, 226, 0.5);
-            animation: petalBloom 4s ease-in-out infinite;
+            animation: petalBloom
+            4s ease-in-out infinite;
             border: 2px solid rgba(93, 173, 226, 0.6);
         }
 
@@ -1380,7 +1370,7 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* Video Modal Styles */
+        /* Video Modal Styles - FIXED FOR MOBILE */
         .video-modal {
             display: none;
             position: fixed;
@@ -1416,6 +1406,7 @@
             max-height: 85vh;
             display: block;
             border-radius: 15px;
+            background: #000;
         }
 
         .video-close {
@@ -1626,197 +1617,6 @@
             z-index: 10000;
         }
 
-        @media (max-width: 768px) {
-            .header h1 { font-size: 2.2rem; }
-            .section { padding: 2rem 1.5rem; }
-            .section h2 { font-size: 1.8rem; }
-            .message { font-size: 1.1rem; }
-            .flower-container { width: 200px; height: 200px; }
-            
-            .top-nav {
-                padding: 0 1rem;
-                height: 60px;
-            }
-            
-            .love-message {
-                font-size: 1rem;
-            }
-            
-            .greeting-icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .greeting-icon svg {
-                width: 22px;
-                height: 22px;
-            }
-            
-            .greeting-content {
-                max-width: 90%;
-                padding: 2rem 1.5rem;
-            }
-            
-            .greeting-content h2 {
-                font-size: 1.8rem;
-            }
-            
-            .greeting-content p {
-                font-size: 1.3rem;
-            }
-            
-            body {
-                padding-top: 70px;
-            }
-
-            .login-container {
-                padding: 2rem 1.5rem;
-            }
-
-            .login-container h1 {
-                font-size: 2rem;
-            }
-
-            .login-container p {
-                font-size: 1rem;
-            }
-
-            .treasure-button {
-                font-size: 1.2rem;
-                padding: 1rem 2rem;
-            }
-
-            .video-container {
-                max-width: 95%;
-            }
-
-            /* Mobile responsive dashboard */
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .dashboard-header h1 {
-                font-size: 2rem;
-            }
-
-            .dashboard-header p {
-                font-size: 1.2rem;
-            }
-
-            .dashboard-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .dashboard-card-icon {
-                /* Mobile responsive sizing for visual metrics */
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-circle {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-value {
-                font-size: 1.4rem;
-            }
-
-            .metric-bars {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-infinity {
-                font-size: 3rem;
-            }
-
-            .metric-counter {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-counter-number {
-                font-size: 1.8rem;
-            }
-
-            .metric-clock {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-arrow {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-milestone {
-                width: 100px;
-                height: 100px;
-            }
-
-            .metric-milestone-number {
-                font-size: 2rem;
-            }
-
-            .dashboard-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .dashboard-card p {
-                font-size: 1rem;
-            }
-
-            .back-to-menu {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
-                /* Adjusting mobile position to be below header */
-                top: 80px;
-                left: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .love-message {
-                font-size: 0.85rem;
-            }
-            
-            .greeting-content h2 {
-                font-size: 1.5rem;
-            }
-            
-            .greeting-content p {
-                font-size: 1.1rem;
-            }
-
-            .login-container h1 {
-                font-size: 1.7rem;
-            }
-
-            .login-container p {
-                font-size: 0.95rem;
-            }
-
-            .login-input {
-                font-size: 1rem;
-                padding: 0.9rem 1.2rem;
-            }
-
-            .treasure-button {
-                font-size: 1.1rem;
-                padding: 0.9rem 1.8rem;
-            }
-
-            .dashboard-header h1 {
-                font-size: 1.7rem;
-            }
-
-            .dashboard-header p {
-                font-size: 1rem;
-            }
-        }
-
         /* Love Game styles */
         .metric-heart {
             width: 120px;
@@ -1993,7 +1793,6 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
-        /* <CHANGE> Added video button styles for Love Game section */
         .video-launch-btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -2026,6 +1825,152 @@
         }
 
         @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .section { padding: 2rem 1.5rem; }
+            .section h2 { font-size: 1.8rem; }
+            .message { font-size: 1.1rem; }
+            .flower-container { width: 200px; height: 200px; }
+            
+            .top-nav {
+                padding: 0 1rem;
+                height: 60px;
+            }
+            
+            .love-message {
+                font-size: 1rem;
+            }
+            
+            .greeting-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .greeting-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+            
+            .greeting-content {
+                max-width: 90%;
+                padding: 2rem 1.5rem;
+            }
+            
+            .greeting-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .greeting-content p {
+                font-size: 1.3rem;
+            }
+            
+            body {
+                padding-top: 70px;
+            }
+
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-container h1 {
+                font-size: 2rem;
+            }
+
+            .login-container p {
+                font-size: 1rem;
+            }
+
+            .treasure-button {
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+            }
+
+            .video-container {
+                max-width: 95%;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-header p {
+                font-size: 1.2rem;
+            }
+
+            .dashboard-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .dashboard-card-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-circle {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-value {
+                font-size: 1.4rem;
+            }
+
+            .metric-bars {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-infinity {
+                font-size: 3rem;
+            }
+
+            .metric-counter {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-counter-number {
+                font-size: 1.8rem;
+            }
+
+            .metric-clock {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-arrow {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-milestone {
+                width: 100px;
+                height: 100px;
+            }
+
+            .metric-milestone-number {
+                font-size: 2rem;
+            }
+
+            .dashboard-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .dashboard-card p {
+                font-size: 1rem;
+            }
+
+            .back-to-menu {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                top: 80px;
+                left: 15px;
+            }
+
             .love-game-container {
                 padding: 1.5rem;
             }
@@ -2049,6 +1994,46 @@
 
             .result-icon {
                 font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .love-message {
+                font-size: 0.85rem;
+            }
+            
+            .greeting-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .greeting-content p {
+                font-size: 1.1rem;
+            }
+
+            .login-container h1 {
+                font-size: 1.7rem;
+            }
+
+            .login-container p {
+                font-size: 0.95rem;
+            }
+
+            .login-input {
+                font-size: 1rem;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .treasure-button {
+                font-size: 1.1rem;
+                padding: 0.9rem 1.8rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .dashboard-header p {
+                font-size: 1rem;
             }
         }
     </style>
@@ -2090,11 +2075,11 @@
             <span class="popup-sparkle">✨</span>
             <span class="popup-sparkle">✨</span>
             <span class="popup-sparkle">✨</span>
-            <h2>Happy 20th Birthday! 🎉</h2>
+            <h2>Happy 20th Birthday!</h2>
             <p>I love you so much, baby!</p>
             <button class="close-popup" onclick="closeGreeting()">Close</button>
             <div style="text-align: center; margin-top: 2rem;">
-                <button class="treasure-button" onclick="openVideo()">See treasure 🎁</button>
+                <button class="treasure-button" onclick="openVideo()">See treasure</button>
             </div>
         </div>
     </div>
@@ -2141,22 +2126,21 @@
         <div class="loading-subtext"> - claude</div>
     </div>
 
-    <!-- Fixed for mobile playback -->
+    <!-- FIXED VIDEO MODALS FOR MOBILE -->
     <div class="video-modal" id="videoModal" onclick="closeVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <div class="video-close" onclick="closeVideo()"></div>
-            <video id="birthdayVideo" controls playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
+            <video id="birthdayVideo" controls playsinline webkit-playsinline preload="metadata">
                 <source src="BirthdayVideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
     </div>
 
-    <!-- Fixed for mobile playback -->
     <div class="video-modal" id="erVideoModal" onclick="closeErVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <div class="video-close" onclick="closeErVideo()"></div>
-            <video id="erVideo" controls playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
+            <video id="erVideo" controls playsinline webkit-playsinline preload="metadata">
                 <source src="er.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -2169,7 +2153,7 @@
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="/placeholder.svg" alt="Full size" />
+        <img id="lightbox-img" src="" alt="Full size" />
     </div>
 
     <button class="back-to-menu" id="backToMenu" onclick="showDashboard()">← Back to Menu</button>
@@ -2295,10 +2279,11 @@
         </div>
     </div>
 
+    <!-- ALL CONTENT SECTIONS HERE -->
     <div class="content-section" id="section1">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2329,7 +2314,7 @@
     <div class="content-section" id="section2">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2348,7 +2333,8 @@
                 <h2>✨ Your Attractive Qualities</h2>
                 <div class="photo-container">
                     <img id="photo4" src="photo4.jpg" alt="Beautiful" onclick="openLightbox('photo4.jpg')" />
-                </div>
+                </div
+                >
                 <div class="message">
                     Honey, I'm telling you -your smile could light up the darkest room, and your laughter is the most beautiful melody I've ever heard. 
                     The way you care for others, your gentle heart, your genuine love, and your beauty inspire me every single day. 
@@ -2363,7 +2349,7 @@
     <div class="content-section" id="section3">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2397,7 +2383,7 @@
     <div class="content-section" id="section4">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2430,7 +2416,7 @@
     <div class="content-section" id="section5">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2464,7 +2450,7 @@
     <div class="content-section" id="section6">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2498,7 +2484,7 @@
     <div class="content-section" id="section7">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2529,7 +2515,7 @@
     <div class="content-section" id="section8">
         <div class="container">
             <div class="header">
-                <h1>Happy Birthday, My Stunning Girlfriend 🎉</h1>
+                <h1>Happy Birthday, My Stunning Girlfriend</h1>
             </div>
 
             <div class="section">
@@ -2552,7 +2538,7 @@
                     Happy 20th birthday, my love! Here's to many more years of laughter, love, and beautiful memories together. 
                     I love you more than words can express, and I'm so grateful to celebrate this day with you. 
                     You deserve all the best things in life, and I promise to always be by your side, supporting you, loving you, and cherishing every moment we share. 
-                    Happy birthday, my beautiful baby! 🎂🎉💙
+                    Happy birthday, my beautiful baby!
                 </div>
             </div>
         </div>
@@ -2561,7 +2547,7 @@
     <div class="content-section" id="loveGame">
         <div class="container">
             <div class="header">
-                <h1>How Much Do I Love You? 💕</h1>
+                <h1>How Much Do I Love You?</h1>
             </div>
 
             <div class="section">
@@ -2593,13 +2579,12 @@
                     <div class="game-result hidden" id="gameResult">
                         <div class="result-icon">💖</div>
                         <h2 class="result-title">Perfect Score!</h2>
-                        <p class="result-message">You got it right Hon! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby! 💕</p>
+                        <p class="result-message">You got it right Hon! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby!</p>
                         <button class="game-restart-btn" onclick="restartGame()">Play Again</button>
                     </div>
 
-                    <!-- <CHANGE> Added video button for er.mp4 -->
                     <div style="text-align: center; margin-top: 2rem;">
-                        <button class="video-launch-btn" onclick="openErVideo()">Watch Special Video 💕</button>
+                        <button class="video-launch-btn" onclick="openErVideo()">Watch Special Video</button>
                     </div>
                 </div>
             </div>
@@ -2607,31 +2592,25 @@
     </div>
 
     <script>
-        // Added dashboard navigation functions
+        // Dashboard navigation functions
         function showDashboard() {
-            // Hide all content sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('show');
             });
             
-            // Show dashboard
             document.getElementById('dashboard').classList.add('show');
             document.getElementById('backToMenu').classList.remove('show');
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showSection(sectionId) {
-            // Hide dashboard
             document.getElementById('dashboard').classList.remove('show');
             
-            // Hide all content sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('show');
             });
             
-            // Show selected section
             document.getElementById(sectionId).classList.add('show');
             document.getElementById('backToMenu').classList.add('show');
             
@@ -2639,7 +2618,6 @@
                 initLoveGame();
             }
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2668,7 +2646,6 @@
                     document.getElementById('loadingScreen').classList.add('fade-out');
                     setTimeout(() => {
                         document.getElementById('loadingScreen').style.display = 'none';
-                        // Show dashboard instead of main content
                         showDashboard();
                     }, 1000);
                 }, 3000);
@@ -2682,13 +2659,19 @@
             }
         }
 
-        // <CHANGE> Fixed video opening function with proper load and play
+        // FIXED VIDEO FUNCTIONS FOR MOBILE - NO AUTOPLAY
         function openVideo() {
             const videoModal = document.getElementById('videoModal');
             const video = document.getElementById('birthdayVideo');
             videoModal.classList.add('active');
-            video.load(); // Reload video to ensure proper buffering
-            video.play().catch(err => console.log('Video play error:', err));
+            
+            // Reset and load video
+            video.load();
+            video.currentTime = 0;
+            
+            // NO autoplay - let user tap play manually
+            // This prevents mobile freezing issues
+            
             document.body.style.overflow = 'hidden';
         }
 
@@ -2701,13 +2684,18 @@
             document.body.style.overflow = 'auto';
         }
 
-        // <CHANGE> Added functions for er.mp4 video modal
         function openErVideo() {
             const videoModal = document.getElementById('erVideoModal');
             const video = document.getElementById('erVideo');
             videoModal.classList.add('active');
-            video.load(); // Reload video to ensure proper buffering
-            video.play().catch(err => console.log('Video play error:', err));
+            
+            // Reset and load video
+            video.load();
+            video.currentTime = 0;
+            
+            // NO autoplay - let user tap play manually
+            // This prevents mobile freezing issues
+            
             document.body.style.overflow = 'hidden';
         }
 
@@ -2735,7 +2723,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Add click listeners for images to open lightbox
             const photos = document.querySelectorAll('.photo-container img');
             photos.forEach(photo => {
                 photo.addEventListener('click', function() {
@@ -2807,22 +2794,18 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Function to set progress offset for the circular progress bar
         function setCircleProgress(value) {
-            const circumference = 2 * Math.PI * 54; // r = 54
+            const circumference = 2 * Math.PI * 54;
             const offset = circumference - (value / 100) * circumference;
             return offset;
         }
 
-        // Apply progress for specific metrics
         document.addEventListener('DOMContentLoaded', function() {
-            // Section 1: Stunning
             const section1Progress = document.querySelector('.dashboard-card:nth-child(1) .metric-circle-progress');
             if (section1Progress) {
                 section1Progress.style.setProperty('--progress-offset', setCircleProgress(100));
             }
             
-            // Section 5: Love
             const section5Progress = document.querySelector('.dashboard-card:nth-child(5) .metric-circle-progress');
             if (section5Progress) {
                 section5Progress.style.setProperty('--progress-offset', setCircleProgress(100));
@@ -2953,7 +2936,6 @@
             document.getElementById('gameProgress').style.width = progress + '%';
             document.getElementById('currentQuestion').textContent = loveGameQuestions.length;
             
-            // Update result based on score
             const resultTitle = resultDiv.querySelector('.result-title');
             const resultMessage = resultDiv.querySelector('.result-message');
             const resultIcon = resultDiv.querySelector('.result-icon');
@@ -2961,11 +2943,11 @@
             if (gameScore === loveGameQuestions.length) {
                 resultIcon.textContent = '💖';
                 resultTitle.textContent = 'Perfect Score!';
-                resultMessage.textContent = "You got it right! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby! 💕";
+                resultMessage.textContent = "You got it right! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby!";
             } else {
                 resultIcon.textContent = '💕';
                 resultTitle.textContent = `You got ${gameScore} out of ${loveGameQuestions.length}!`;
-                resultMessage.textContent = "But remember, no matter what answers you choose, the truth is: I love you so much beyond words can tell, and beyond what anyone can imagine. You are my world, my heart, my everything! 💖";
+                resultMessage.textContent = "But remember, no matter what answers you choose, the truth is: I love you so much beyond words can tell, and beyond what anyone can imagine. You are my world, my heart, my everything!";
             }
         }
 
