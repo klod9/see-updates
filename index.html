@@ -1817,7 +1817,7 @@
             }
         }
 
-        /* CHANGE: Added Love Game styles */
+        /* Love Game styles */
         .metric-heart {
             width: 120px;
             height: 120px;
@@ -1993,6 +1993,27 @@
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
+        /* <CHANGE> Added video button styles for Love Game section */
+        .video-launch-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff1744 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .video-launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -2120,12 +2141,24 @@
         <div class="loading-subtext"> - claude</div>
     </div>
 
+    <!-- <CHANGE> Fixed BirthdayVideo.mp4 with mobile playback attributes -->
     <div class="video-modal" id="videoModal" onclick="closeVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <div class="video-close" onclick="closeVideo()"></div>
-            <video id="birthdayVideo" controls>
+            <video id="birthdayVideo" controls playsinline webkit-playsinline preload="auto">
                 <source src="BirthdayVideo.mp4" type="video/mp4">
-  
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- <CHANGE> Added second video modal for er.mp4 -->
+    <div class="video-modal" id="erVideoModal" onclick="closeErVideo()">
+        <div class="video-container" onclick="event.stopPropagation()">
+            <div class="video-close" onclick="closeErVideo()"></div>
+            <video id="erVideo" controls playsinline webkit-playsinline preload="auto">
+                <source src="er.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
     </div>
@@ -2149,7 +2182,6 @@
         
         <div class="dashboard-grid">
             <div class="dashboard-card" onclick="showSection('section1')">
-                <!-- Replaced text metric with circular progress visual (100% stunning) -->
                 <div class="dashboard-card-icon">
                     <div class="metric-circle">
                         <svg viewBox="0 0 120 120">
@@ -2160,11 +2192,9 @@
                     </div>
                 </div>
                 <h3>Simply Stunning</h3>
-                
             </div>
 
             <div class="dashboard-card" onclick="showSection('section2')">
-                <!-- Replaced text metric with bar chart visual (1000+ qualities) -->
                 <div class="dashboard-card-icon">
                     <div class="metric-bars">
                         <div class="metric-bar"></div>
@@ -2175,21 +2205,17 @@
                     <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1.2rem;">1000+ Qualities</div>
                 </div>
                 <h3>Attractive Qualities</h3>
-              
             </div>
 
             <div class="dashboard-card" onclick="showSection('section3')">
-                <!-- Replaced text metric with infinity symbol visual -->
                 <div class="dashboard-card-icon">
                     <div class="metric-infinity">∞</div>
                     <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Forever Connected</div>
                 </div>
                 <h3>Soulmate Connection</h3>
-              
             </div>
 
             <div class="dashboard-card" onclick="showSection('section4')">
-                <!-- Replaced text metric with counter visual (365 days) -->
                 <div class="dashboard-card-icon">
                     <div class="metric-counter">
                         <div class="metric-counter-number">365</div>
@@ -2197,11 +2223,9 @@
                     </div>
                 </div>
                 <h3>Wonderful Moments</h3>
-               
             </div>
 
             <div class="dashboard-card" onclick="showSection('section5')">
-                <!-- Replaced text metric with infinity love meter visual -->
                 <div class="dashboard-card-icon">
                     <div class="metric-circle">
                         <svg viewBox="0 0 120 120">
@@ -2212,11 +2236,9 @@
                     </div>
                 </div>
                 <h3>You Being You</h3>
-             
             </div>
 
             <div class="dashboard-card" onclick="showSection('section6')">
-                <!-- Replaced text metric with clock visual (24/7) -->
                 <div class="dashboard-card-icon">
                     <div class="metric-clock">
                         <div class="metric-clock-center"></div>
@@ -2224,11 +2246,9 @@
                     <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1.2rem;">24/7 Thinking</div>
                 </div>
                 <h3>My Guiding Light</h3>
-               
             </div>
 
             <div class="dashboard-card" onclick="showSection('section7')">
-                <!-- Replaced text metric with progress arrow visual -->
                 <div class="dashboard-card-icon">
                     <div class="metric-arrow">
                         <div class="metric-arrow-track">
@@ -2239,11 +2259,9 @@
                     <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Endless Future</div>
                 </div>
                 <h3>Moving Forward</h3>
-              
             </div>
 
             <div class="dashboard-card" onclick="showSection('section8')">
-                <!-- Replaced text metric with milestone visual (20 years) -->
                 <div class="dashboard-card-icon">
                     <div class="metric-milestone">
                         <div class="metric-milestone-number">20</div>
@@ -2251,10 +2269,8 @@
                     </div>
                 </div>
                 <h3>Birthday Wishes</h3>
-              
             </div>
 
-            <!-- CHANGE: Added new Love Game card -->
             <div class="dashboard-card" onclick="showSection('loveGame')">
                 <div class="dashboard-card-icon">
                     <div class="metric-heart">
@@ -2265,7 +2281,6 @@
                     <div class="metric-value" style="position: absolute; bottom: -10px; font-size: 1rem;">Test Your Love</div>
                 </div>
                 <h3>Love Game</h3>
-       
             </div>
         </div>
 
@@ -2543,7 +2558,6 @@
         </div>
     </div>
 
-     <!-- CHANGE: Added new Love Game section -->
     <div class="content-section" id="loveGame">
         <div class="container">
             <div class="header">
@@ -2573,7 +2587,7 @@
                     </div>
 
                     <div class="game-question-container" id="gameQuestionContainer">
-                         Questions will be dynamically inserted here 
+                        <!-- Questions will be dynamically inserted here -->
                     </div>
 
                     <div class="game-result hidden" id="gameResult">
@@ -2581,6 +2595,11 @@
                         <h2 class="result-title">Perfect Score!</h2>
                         <p class="result-message">You got it right Hon! I love you so much beyond words can tell, and beyond what anyone can imagine. My love for you is infinite, eternal, and grows stronger every single day. You are my everything, baby! 💕</p>
                         <button class="game-restart-btn" onclick="restartGame()">Play Again</button>
+                    </div>
+
+                    <!-- <CHANGE> Added video button for er.mp4 -->
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="video-launch-btn" onclick="openErVideo()">Watch Special Video 💕</button>
                     </div>
                 </div>
             </div>
@@ -2663,17 +2682,38 @@
             }
         }
 
+        // <CHANGE> Fixed video opening function with proper load and play
         function openVideo() {
             const videoModal = document.getElementById('videoModal');
             const video = document.getElementById('birthdayVideo');
             videoModal.classList.add('active');
-            video.play();
+            video.load(); // Reload video to ensure proper buffering
+            video.play().catch(err => console.log('Video play error:', err));
             document.body.style.overflow = 'hidden';
         }
 
         function closeVideo() {
             const videoModal = document.getElementById('videoModal');
             const video = document.getElementById('birthdayVideo');
+            videoModal.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+            document.body.style.overflow = 'auto';
+        }
+
+        // <CHANGE> Added functions for er.mp4 video modal
+        function openErVideo() {
+            const videoModal = document.getElementById('erVideoModal');
+            const video = document.getElementById('erVideo');
+            videoModal.classList.add('active');
+            video.load(); // Reload video to ensure proper buffering
+            video.play().catch(err => console.log('Video play error:', err));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeErVideo() {
+            const videoModal = document.getElementById('erVideoModal');
+            const video = document.getElementById('erVideo');
             videoModal.classList.remove('active');
             video.pause();
             video.currentTime = 0;
@@ -2777,13 +2817,19 @@
         // Apply progress for specific metrics
         document.addEventListener('DOMContentLoaded', function() {
             // Section 1: Stunning
-            document.querySelector('#section1 .metric-circle-progress').style.setProperty('--progress-offset', setCircleProgress(100));
+            const section1Progress = document.querySelector('.dashboard-card:nth-child(1) .metric-circle-progress');
+            if (section1Progress) {
+                section1Progress.style.setProperty('--progress-offset', setCircleProgress(100));
+            }
             
             // Section 5: Love
-            document.querySelector('#section5 .metric-circle-progress').style.setProperty('--progress-offset', setCircleProgress(100));
+            const section5Progress = document.querySelector('.dashboard-card:nth-child(5) .metric-circle-progress');
+            if (section5Progress) {
+                section5Progress.style.setProperty('--progress-offset', setCircleProgress(100));
+            }
         });
 
-        // CHANGE: Added Love Game functionality
+        // Love Game functionality
         const loveGameQuestions = [
             {
                 question: "How much do I love you?",
