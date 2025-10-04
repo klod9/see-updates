@@ -2141,22 +2141,22 @@
         <div class="loading-subtext"> - claude</div>
     </div>
 
-    <!-- <CHANGE> Fixed BirthdayVideo.mp4 with mobile playback attributes -->
+    <!-- Fixed for mobile playback -->
     <div class="video-modal" id="videoModal" onclick="closeVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <div class="video-close" onclick="closeVideo()"></div>
-            <video id="birthdayVideo" controls playsinline webkit-playsinline preload="auto">
+            <video id="birthdayVideo" controls playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
                 <source src="BirthdayVideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
     </div>
 
-    <!-- <CHANGE> Added second video modal for er.mp4 -->
+    <!-- Fixed for mobile playback -->
     <div class="video-modal" id="erVideoModal" onclick="closeErVideo()">
         <div class="video-container" onclick="event.stopPropagation()">
             <div class="video-close" onclick="closeErVideo()"></div>
-            <video id="erVideo" controls playsinline webkit-playsinline preload="auto">
+            <video id="erVideo" controls playsinline webkit-playsinline preload="metadata" controlslist="nodownload">
                 <source src="er.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
